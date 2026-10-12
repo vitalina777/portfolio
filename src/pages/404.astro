@@ -1,10 +1,11 @@
 ---
+import { withBase } from '../data/site';
 import Base from '../layouts/Base.astro';
 ---
 <Base title="Page not found">
   <section class="container" style="padding-block:6rem;display:grid;gap:1.5rem">
     <h1 class="display-l">This page doesn’t exist.</h1>
     <p class="body-l">The link may be old. Start from the selected work instead.</p>
-    <p><a class="btn btn-primary" href="/#work">See selected work</a></p>
+    <p><a class="btn btn-primary" href={withBase('/#work')}>See selected work</a></p>
   </section>
 </Base>

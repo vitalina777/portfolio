@@ -4,7 +4,7 @@ import Facts from '../components/Facts.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import Quote from '../components/Quote.astro';
 import Img from '../components/Img.astro';
-import { site } from '../data/site';
+import { site, withBase } from '../data/site';
 
 type Row = { years: string; title: string; meta: string; text: string; case?: string };
 const groups: { name: string; meta: string; rows: Row[] }[] = [
@@ -77,7 +77,7 @@ const education = [
               <div class="row-title">
                 <h4 class="h4">{r.title}</h4>
                 <p class="muted">{r.meta}</p>
-                {r.case && <a href={`/work/${r.case}/`}>Read the case<span class="visually-hidden">: {r.title}</span></a>}
+                {r.case && <a href={withBase(`/work/${r.case}/`)}>Read the case<span class="visually-hidden">: {r.title}</span></a>}
               </div>
               <p class="row-text">{r.text}</p>
             </li>
@@ -128,7 +128,7 @@ const education = [
     <div class="quotes">
       <Quote size="l" quote="Every design choice came with a clear reason. That made it easy to get our business and security teams on the same page." who="Digital & IT lead, TAKRAF · Customer portal, 2026" />
       <Quote size="l" quote="The design fits our brand perfectly, and it did from the very first version. It already feels like a TAKRAF product." who="Marketing, TAKRAF" />
-      <a href="/work/takraf/">Read the TAKRAF case</a>
+      <a href={withBase('/work/takraf/')}>Read the TAKRAF case</a>
     </div>
   </section>
 </Base>

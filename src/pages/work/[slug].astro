@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../data/site';
 import Base from '../../layouts/Base.astro';
 import Facts from '../../components/Facts.astro';
 import Img from '../../components/Img.astro';
@@ -16,7 +17,7 @@ const next = getCase(c.next)!;
 <Base title={c.title} description={c.tldr.outcome} current="work">
   <article>
     <header class="container case-hero">
-      <a class="label back" href="/#work">All work</a>
+      <a class="label back" href={withBase('/#work')}>All work</a>
       <p class="label eyebrow"><span class="accent">{c.number}</span>{c.eyebrow.map((e) => <span>{e}</span>)}</p>
       <h1 class="display-xl">{c.title}</h1>
       <p class="body-l measure">{c.subtitle}</p>
@@ -58,7 +59,7 @@ const next = getCase(c.next)!;
     )}
 
     <nav class="container section" aria-label="Next case">
-      <a class="next" href={`/work/${next.slug}/`}>
+      <a class="next" href={withBase(`/work/${next.slug}/`)}>
         <span class="label">Next case</span>
         <span class="h2">{next.cardTitle}</span>
       </a>

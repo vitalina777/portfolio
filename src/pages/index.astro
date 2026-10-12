@@ -4,7 +4,7 @@ import Facts from '../components/Facts.astro';
 import CaseCard from '../components/CaseCard.astro';
 import Quote from '../components/Quote.astro';
 import { cases } from '../data/cases';
-import { site } from '../data/site';
+import { site, withBase } from '../data/site';
 const allyz = cases.find((c) => c.slug === 'allyz')!;
 const others = cases.filter((c) => c.slug !== 'allyz');
 const strengths = [
@@ -70,7 +70,7 @@ const strengths = [
     <p class="label eyebrow"><span class="dot" aria-hidden="true"></span>What clients say</p>
     <div class="testimonial">
       <Quote size="l" quote="Every design choice came with a clear reason. That made it easy to get our business and security teams on the same page." who="Digital & IT lead, TAKRAF · Customer portal, 2026" />
-      <a href="/work/takraf/">Read the TAKRAF case</a>
+      <a href={withBase('/work/takraf/')}>Read the TAKRAF case</a>
     </div>
   </section>
 
@@ -84,7 +84,7 @@ const strengths = [
         <li>
           <h3 class="h4">{s.title}</h3>
           <p class="muted">{s.text}</p>
-          <a href={s.link}>See it in the {s.linkText} case</a>
+          <a href={withBase(s.link)}>See it in the {s.linkText} case</a>
         </li>
       ))}
     </ul>

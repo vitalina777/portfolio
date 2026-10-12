@@ -1,15 +1,15 @@
 ---
-import { site } from '../data/site';
+import { site, withBase } from '../data/site';
 interface Props { current?: 'work' | 'about' }
 const { current } = Astro.props;
 ---
 <header class="header">
   <div class="container header-inner">
-    <a class="logo" href="/">{site.name}</a>
+    <a class="logo" href={withBase('/')}>{site.name}</a>
     <nav aria-label="Main">
       <ul role="list" class="nav">
-        <li><a href="/#work" aria-current={current === 'work' ? 'page' : undefined}>Work</a></li>
-        <li><a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a></li>
+        <li><a href={withBase('/#work')} aria-current={current === 'work' ? 'page' : undefined}>Work</a></li>
+        <li><a href={withBase('/about/')} aria-current={current === 'about' ? 'page' : undefined}>About</a></li>
         <li><a href={site.cv}>CV <span class="visually-hidden">(PDF)</span></a></li>
         <li><a class="btn btn-primary contact" href={`mailto:${site.email}`}>Contact</a></li>
       </ul>

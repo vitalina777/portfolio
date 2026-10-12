@@ -12,11 +12,15 @@ npm run build      # production build in dist/
 
 ## Publish on GitHub Pages
 
-1. Create a public repository named `<your-github-login>.github.io`.
+1. Create a public repository. Any name works:
+   - `<login>.github.io` → the site opens at `https://<login>.github.io/`
+   - any other name, e.g. `portfolio` → `https://<login>.github.io/portfolio/`
+   The address and all links are detected automatically during the build.
 2. Push this folder to the `main` branch.
-3. In the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-4. Every push to `main` rebuilds and publishes the site (`.github/workflows/deploy.yml`).
-5. Update `site` in `astro.config.mjs` and `repo` in `src/data/site.ts` with your real address.
+3. In the repository: **Settings → Pages → Build and deployment → Source: GitHub Actions** (not "Deploy from a branch").
+4. Every push to `main` rebuilds and publishes the site. Check progress in the **Actions** tab.
+5. Update `repo` in `src/data/site.ts` with your repository link.
+6. Custom domain later: set `CUSTOM_DOMAIN` in `astro.config.mjs`.
 
 ## Where things live
 
