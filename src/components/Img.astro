@@ -1,0 +1,28 @@
+---
+/*
+  Shows an image from src/assets/<path>. If the file is not there yet,
+  renders a labelled placeholder with the expected file name, so you can
+  export it from Figma and drop it in.
+*/
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+interface Props { src: string; alt: string; ratio?: string; eager?: boolean; class?: string }
+const { src, alt, ratio = '16 / 10', eager = false, class: cls } = Astro.props;
+const files = import.meta.glob<{ default: ImageMetadata }>('/src/assets/**/*.{png,jpg,jpeg,webp,avif}', { eager: true });
+const match = Object.entries(files).find(([k]) => k.endsWith('/assets/' + src));
+---
+{match ? (
+  <Image src={match[1].default} alt={alt} class={cls} loading={eager ? 'eager' : 'lazy'} widths={[640, 1024, 1600, 2400]} sizes="(max-width: 1280px) 100vw, 1280px" />
+) : (
+  <div class:list={['placeholder', cls]} style={`aspect-ratio:${ratio}`} role="img" aria-label={alt}>
+    <span class="label label-s">Export from Figma → src/assets/{src}</span>
+  </div>
+)}
+
+<style>
+  .placeholder {
+    width: 100%; display: grid; place-items: center; text-align: center; padding: 1rem;
+    background: repeating-linear-gradient(-45deg, #ECECE6 0 12px, #E6E6DF 12px 24px);
+    border: 1px dashed var(--border); border-radius: var(--radius-s);
+  }
+</style>

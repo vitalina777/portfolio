@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import Facts from '../components/Facts.astro';
+import CaseCard from '../components/CaseCard.astro';
+import Quote from '../components/Quote.astro';
+import { cases } from '../data/cases';
+import { site } from '../data/site';
+const allyz = cases.find((c) => c.slug === 'allyz')!;
+const others = cases.filter((c) => c.slug !== 'allyz');
+const strengths = [
+  { title: 'Complex multi-role systems', text: 'Platforms for businesses, customers and employees with strict permissions: access models, information architecture and flows that stay simple on the surface.', link: '/work/takraf/', linkText: 'TAKRAF customer portal' },
+  { title: 'Discovery & alignment', text: 'Workshops that turn a broad RFP into an agreed scope, and design decisions explained in business terms.', link: '/work/takraf/', linkText: 'TAKRAF discovery workshops' },
+  { title: 'Design systems & delivery', text: 'Tokens, text variables, accessibility and every state designed, so developers can build without guessing.', link: '/work/allyz/', linkText: 'allyz accessibility' },
+];
+---
+<Base current="work">
+  <section class="container hero" aria-labelledby="hero-title">
+    <p class="label eyebrow"><span class="dot" aria-hidden="true"></span>Senior Product Designer · B2B &amp; B2C · Warsaw · Open to remote</p>
+    <h1 id="hero-title" class="display-xl">I design products where many roles, rules and data meet.</h1>
+    <p class="body-l measure">{site.role} with 6+ years in B2B and B2C. My latest portal is live with 3 customers across dozens of mine sites, and my accessibility work took allyz from 65% to 93% WCAG AA.</p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#work">View work</a>
+      <a class="btn btn-secondary" href={site.cv}>Download CV <span class="visually-hidden">(PDF)</span></a>
+    </div>
+  </section>
+
+  <div class="container">
+    <Facts items={[
+      { v: '6+', l: 'Years' },
+      { v: 'Won', l: 'Against dozens of vendors' },
+      { v: '3', l: 'Customers live' },
+      { v: '65→93%', l: 'WCAG AA, allyz' },
+      { v: '5', l: 'Verticals, one process' },
+    ]} />
+  </div>
+
+  <section id="work" class="container section" aria-labelledby="work-title">
+    <div class="work-head">
+      <h2 id="work-title" class="h2">Selected work</h2>
+      <p class="label">{String(cases.length).padStart(2, '0')} cases</p>
+    </div>
+    <div class="grid">
+      <CaseCard c={others[0]} />
+      <CaseCard c={allyz}>
+        <div slot="cover" class="allyz-cover">
+          <p class="label label-s">allyz · Allianz Partners · 2025</p>
+          <p class="wcag">WCAG 2.2 AA</p>
+          <p class="allyz-lead">One accessibility process for every vertical, on web and in the app, ahead of the European Accessibility Act.</p>
+          <div class="allyz-panels">
+            <div class="audit">
+              <p class="label label-s">Independent audit</p>
+              <p class="audit-n">12 of 18</p>
+              <p>Findings already covered by our self-audit.</p>
+            </div>
+            <ul role="list" class="checks">
+              <li><span aria-hidden="true">✓</span>Colour contrast</li>
+              <li><span aria-hidden="true">✓</span>Text resize to 200%</li>
+              <li><span aria-hidden="true">✓</span>Keyboard &amp; focus</li>
+              <li><span aria-hidden="true">✓</span>Target size</li>
+            </ul>
+          </div>
+        </div>
+      </CaseCard>
+      {others.slice(1, 3).map((c) => <CaseCard c={c} />)}
+      {others[3] && <div class="wide-slot"><CaseCard c={others[3]} wide /></div>}
+    </div>
+  </section>
+
+  <section class="container section" aria-label="What clients say">
+    <p class="label eyebrow"><span class="dot" aria-hidden="true"></span>What clients say</p>
+    <div class="testimonial">
+      <Quote size="l" quote="Every design choice came with a clear reason. That made it easy to get our business and security teams on the same page." who="Digital & IT lead, TAKRAF · Customer portal, 2026" />
+      <a href="/work/takraf/">Read the TAKRAF case</a>
+    </div>
+  </section>
+
+  <section class="container section" aria-labelledby="strengths-title">
+    <div class="section-head">
+      <p class="label">What I bring</p>
+      <h2 id="strengths-title" class="h2">Three things teams usually hire me for.</h2>
+    </div>
+    <ul role="list" class="strengths">
+      {strengths.map((s) => (
+        <li>
+          <h3 class="h4">{s.title}</h3>
+          <p class="muted">{s.text}</p>
+          <a href={s.link}>See it in the {s.linkText} case</a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero { display: grid; gap: 2rem; padding-block: clamp(3.5rem, 2rem + 5vw, 6rem) 3rem; }
+  .hero h1 { max-width: 16ch; }
+  .eyebrow { display: flex; align-items: center; gap: 0.75rem; }
+  .dot { width: 8px; height: 8px; background: var(--accent); flex: none; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .work-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 2.5rem; }
+  .grid { display: grid; gap: clamp(2.5rem, 2rem + 2vw, 4rem) 2rem; grid-template-columns: 1fr; }
+  @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .wide-slot { grid-column: 1 / -1; } }
+  .allyz-cover { padding: clamp(1.25rem, 1rem + 1.5vw, 2rem); display: grid; gap: 0.75rem; color: #3B2A7A; aspect-ratio: 4 / 3; align-content: start; overflow: hidden; }
+  .allyz-cover .label { color: #5B4BB0; }
+  .wcag { font-size: clamp(2.5rem, 1.6rem + 3vw, 4rem); font-weight: 500; letter-spacing: -0.03em; line-height: 1; color: #4F3CC9; }
+  .allyz-lead { max-width: 28ch; color: #2E2A3D; }
+  .allyz-panels { display: grid; grid-template-columns: 1fr 1.2fr; gap: 0.75rem; margin-top: auto; align-items: end; }
+  .audit { background: #4F3CC9; color: #fff; border-radius: var(--radius-s); padding: 1rem; display: grid; gap: 0.25rem; }
+  .audit .label { color: #E4DEFF; }
+  .audit-n { font-size: 1.5rem; font-weight: 500; }
+  .checks { background: #fff; border-radius: var(--radius-s); padding: 0.75rem; display: grid; gap: 0.5rem; font-size: 0.875rem; color: var(--text-primary); }
+  .checks span { display: inline-grid; place-items: center; width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; border-radius: 50%; background: #0E9F5B; color: #fff; font-size: 0.75rem; }
+  @media (max-width: 520px) { .allyz-panels { grid-template-columns: 1fr; } .checks { display: none; } }
+  .testimonial { display: grid; gap: 1.5rem; margin-top: 1.75rem; }
+  .strengths { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+  .strengths li { background: var(--bg-surface); border-radius: var(--radius-s); padding: 1.5rem; display: grid; gap: 0.75rem; align-content: start; }
+</style>

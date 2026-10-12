@@ -1,0 +1,36 @@
+---
+import Img from './Img.astro';
+import type { Case } from '../data/types';
+interface Props { c: Case; wide?: boolean }
+const { c, wide = false } = Astro.props;
+---
+<article class:list={['card', { wide }]}>
+  <div class="cover" style={c.coverBg ? `background:${c.coverBg}` : undefined}>
+    <slot name="cover"><Img src={c.cover.src} alt={c.cover.alt} ratio="4 / 3" /></slot>
+  </div>
+  <div class="body">
+    <p class="label meta">
+      <span class="accent">{c.number}</span>
+      <span>{c.category}</span>
+      {c.tag && <span class="tag">{c.tag}</span>}
+    </p>
+    <h3 class="h3"><a href={`/work/${c.slug}/`} class="stretched">{c.cardTitle}</a></h3>
+    <p class="muted">{c.cardMeta}</p>
+  </div>
+</article>
+<style>
+  .card { position: relative; display: grid; gap: 1.25rem; align-content: start; }
+  .cover { border-radius: var(--radius-m); overflow: hidden; background: linear-gradient(160deg, #E8ECF2, #DCE5EE); }
+  .cover :global(img) { width: 100%; height: auto; }
+  .body { display: grid; gap: 0.75rem; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
+  .tag { border: 1px solid var(--text-primary); color: var(--text-primary); padding: 0.125rem 0.375rem; }
+  .h3 a { text-decoration: none; }
+  .stretched::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-m); }
+  .card:hover .h3 a { text-decoration: underline; }
+  .stretched:focus-visible { outline: none; }
+  .stretched:focus-visible::after { outline: 2px solid var(--accent); outline-offset: 6px; }
+  @media (min-width: 900px) {
+    .wide { grid-template-columns: 1.4fr 1fr; align-items: center; gap: 2.5rem; }
+  }
+</style>

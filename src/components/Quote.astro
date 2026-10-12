@@ -1,0 +1,15 @@
+---
+interface Props { quote: string; who: string; size?: 'l' | 'm' }
+const { quote, who, size = 'm' } = Astro.props;
+---
+<figure class:list={['quote', size]}>
+  <blockquote><p>“{quote}”</p></blockquote>
+  <figcaption class="label label-s">{who}</figcaption>
+</figure>
+<style>
+  .quote { display: grid; gap: 1rem; }
+  .quote p { font-weight: 500; letter-spacing: -0.02em; line-height: 1.2; }
+  .l p { font-size: clamp(1.75rem, 1.2rem + 2vw, 2.75rem); max-width: 66rem; }
+  .m p { font-size: var(--h4); line-height: 1.35; }
+  .m { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-s); padding: 1.5rem; align-content: space-between; }
+</style>

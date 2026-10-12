@@ -1,0 +1,6 @@
+---
+interface Props { n?: string; text: string; as?: string }
+const { n, text } = Astro.props;
+---
+<p class="label section-label">{n && <span class="accent">{n}</span>}<span>{text}</span></p>
+<style>.section-label { display: flex; gap: 0.75rem; }</style>

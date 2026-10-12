@@ -1,0 +1,160 @@
+---
+import Base from '../layouts/Base.astro';
+import Facts from '../components/Facts.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import Quote from '../components/Quote.astro';
+import Img from '../components/Img.astro';
+import { site } from '../data/site';
+
+type Row = { years: string; title: string; meta: string; text: string; case?: string };
+const groups: { name: string; meta: string; rows: Row[] }[] = [
+  { name: 'Andersen', meta: 'Product Designer · Design lead · 2021 – Present', rows: [
+    { years: '2026', title: 'TAKRAF Customer Portal', meta: 'Industrial · B2B · web & mobile', case: 'takraf', text: 'Design lead from pre-sale to a live product: discovery workshops, a two-axis role model and 160+ screens in English and Spanish. Won against dozens of vendors, now live with 3 customers.' },
+    { years: '2022 – 2025', title: 'Allianz Partners · allyz', meta: 'Insurtech · B2C · web & app', case: 'allyz', text: 'Designed customer account management, then led accessibility across 5 verticals ahead of the European Accessibility Act. WCAG 2.2 AA coverage grew from 65% to 93%.' },
+    { years: '2025', title: 'CleanConnect.ai', meta: 'Energy · AI SaaS · B2B', case: 'cleanconnect', text: 'Designed new data-heavy features across 5 sub-products, from emissions monitoring and incidents to energy certificates: concepts for client demos, prototypes and 62+ pages of final UI in the existing design system.' },
+    { years: '2021 – 2022', title: 'Andersen internal CRM', meta: 'Internal tools · B2E', text: 'Lead designer for the company’s CRM: a team profitability calculator, roles and permissions, and filters with saved templates for large data tables. Set up research on the project, ran usability tests and managed junior designers.' },
+  ] },
+  { name: 'Projector Institute', meta: 'Product design course · Study projects on real products · 2022', rows: [
+    { years: '2022', title: 'Liki24', meta: 'Pharmacy delivery · B2C', case: 'liki24', text: 'Research sprint in a team of 6 designers: 29 interviews, 6 hypotheses and usability tests to find out why users abandon checkout.' },
+    { years: '2022', title: 'Vchasno', meta: 'E-signature · B2B', case: 'vchasno', text: 'Research sprint in a team of 5 designers: OOUX, BPMN and usability testing to close a revenue leak in the product.' },
+  ] },
+  { name: 'Everlabs', meta: 'UX/UI Designer · 2020 – 2021', rows: [
+    { years: '2020 – 2021', title: 'Client projects', meta: 'B2B · B2C · CRM · SaaS', text: 'Business research and design for B2B, B2C, CRM and SaaS products: sites, dashboards and internal tools, UI kits and design styles, wireframes and prototypes, and preparing designs for development.' },
+  ] },
+  { name: 'Independent', meta: 'Alongside my main work', rows: [
+    { years: 'Side project', title: 'My own product', meta: 'Startup · from idea to pilot', text: 'Took a product of my own from idea to a working app and a pilot, bringing 40 partners and 5 companies on board.' },
+    { years: '2020 – 2022', title: 'Game of Fonts', meta: 'Design community · Cherkasy, part-time', text: 'Organised design competitions and events for a local design community, ran its social media and wrote articles about our events.' },
+  ] },
+];
+const mentoring: Row[] = [
+  { years: 'At Andersen', title: 'Mentoring designers in the company', meta: 'Andersen', text: 'I mentor designers growing inside Andersen. I assess them at every stage of the theory programme, help with technical questions on their real projects and stay with them until they feel confident on their own.' },
+  { years: 'Independent', title: 'One-on-one mentoring', meta: 'Personal project', text: 'I built a learning plan for a designer starting out, came up with a product idea for her to work on and designed it together with her. I prepared lectures, reviewed her work, and helped her put together a portfolio and get ready for interviews. She landed a design job after two months of working together.' },
+];
+const methods = ['Discovery workshops','Stakeholder interviews','User interviews','Usability testing','JTBD','OOUX','BPMN','Customer journey maps','Value Proposition Canvas','Information architecture','User flows','Accessibility (WCAG AA)','Localization'];
+const tools = ['Figma','Design systems & variables','Prototyping','FigJam','Miro','Jira','Confluence','HTML & CSS'];
+const education = [
+  { years: '2020 – 2022', title: 'Bachelor’s degree in Computer Science', meta: 'Cherkasy State Technological University' },
+  { years: '2022', title: 'Product Design & UX Research', meta: 'Projector Institute' },
+  { years: '2016 – 2020', title: 'Junior Specialist in Software Development', meta: 'Cherkasy Polytechnic College' },
+];
+---
+<Base title="About" current="about" description="About Vitalina Plichko, Senior Product Designer: experience, mentoring, toolbox and education.">
+  <section class="container about-hero">
+    <div class="intro">
+      <p class="label">About · Warsaw · Open to remote</p>
+      <h1 class="display-xl">Hi, I’m Vitalina.</h1>
+      <div class="copy">
+        <p class="body-l">I’m a Senior Product Designer with 6+ years of experience designing products for businesses, their customers and their employees: B2B, B2C and B2E. I’m at my best when a product is messy: many roles, strict permissions, scattered data and stakeholders who don’t yet agree on what they need. I lead design on projects, manage junior designers and mentor others along the way.</p>
+        <p class="body-l">My work usually starts before the first wireframe, in discovery workshops where business, IT and marketing align on one picture of the product. From there I map roles, flows and edge cases, build on a design system, and hand over designs that developers can ship without guessing. With a degree in computer science, I speak developer: tokens, variables and handoff that maps one to one to code.</p>
+        <p class="body-l">I also think like an owner. Beyond client work, I’ve taken a product of my own from idea to a working app and a pilot, including bringing 40 partners and 5 companies on board. That experience taught me to weigh every design decision against what the business actually needs.</p>
+      </div>
+      <div class="ctas">
+        <a class="btn btn-primary" href={site.cv}>Download CV <span class="visually-hidden">(PDF)</span></a>
+        <a class="btn btn-secondary" href={`mailto:${site.email}`}>Get in touch</a>
+      </div>
+    </div>
+    <div class="photo"><Img src="about/portrait.jpg" alt="Vitalina Plichko, portrait in a red top" ratio="3 / 4" eager /></div>
+  </section>
+
+  <div class="container">
+    <Facts items={[
+      { v: '6+', l: 'Years in product design' },
+      { v: '4', l: 'Industries: insurance, industrial, energy, health' },
+      { v: 'B2B · B2C', l: 'Business, consumer & employee products' },
+      { v: 'EN / ES', l: 'Multilingual products shipped' },
+    ]} />
+  </div>
+
+  <section class="container section" aria-labelledby="exp">
+    <div class="section-head"><SectionLabel n="01" text="Experience" /><h2 id="exp" class="h2">What I’ve worked on.</h2></div>
+    {groups.map((g) => (
+      <div class="group">
+        <h3 class="h3 group-name">{g.name} <span class="label label-s">{g.meta}</span></h3>
+        <ul role="list" class="rows">
+          {g.rows.map((r) => (
+            <li class="row">
+              <p class="label label-s">{r.years}</p>
+              <div class="row-title">
+                <h4 class="h4">{r.title}</h4>
+                <p class="muted">{r.meta}</p>
+                {r.case && <a href={`/work/${r.case}/`}>Read the case<span class="visually-hidden">: {r.title}</span></a>}
+              </div>
+              <p class="row-text">{r.text}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </section>
+
+  <section class="container section" aria-labelledby="mentor">
+    <div class="section-head"><SectionLabel n="02" text="Mentoring" /><h2 id="mentor" class="h2">Helping designers grow.</h2></div>
+    <ul role="list" class="rows">
+      {mentoring.map((r) => (
+        <li class="row">
+          <p class="label label-s">{r.years}</p>
+          <div class="row-title"><h3 class="h4">{r.title}</h3><p class="muted">{r.meta}</p></div>
+          <p class="row-text">{r.text}</p>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="container section" aria-labelledby="tools">
+    <div class="section-head"><SectionLabel n="03" text="Toolbox" /><h2 id="tools" class="h2">Methods and tools I use every day.</h2></div>
+    <div class="toolbox">
+      <div><h3 class="label">Methods</h3><ul role="list" class="chips">{methods.map((m) => <li>{m}</li>)}</ul></div>
+      <div><h3 class="label">Tools</h3><ul role="list" class="chips">{tools.map((m) => <li>{m}</li>)}</ul></div>
+    </div>
+  </section>
+
+  <section class="container section" aria-labelledby="edu">
+    <div class="section-head"><SectionLabel n="04" text="Education" /><h2 id="edu" class="visually-hidden">Education and languages</h2></div>
+    <ul role="list" class="rows">
+      {education.map((e) => (
+        <li class="row edu"><p class="label label-s">{e.years}</p><div class="row-title"><h3 class="h4">{e.title}</h3><p class="muted">{e.meta}</p></div></li>
+      ))}
+    </ul>
+    <h3 class="label langs-title">Languages</h3>
+    <dl class="langs">
+      <div><dt class="h4">Ukrainian</dt><dd class="muted">Native</dd></div>
+      <div><dt class="h4">English</dt><dd class="muted">Upper-intermediate · B2</dd></div>
+      <div><dt class="h4">Polish</dt><dd class="muted">Intermediate · B1</dd></div>
+    </dl>
+  </section>
+
+  <section class="container section" aria-label="What clients say">
+    <p class="label">What clients say</p>
+    <div class="quotes">
+      <Quote size="l" quote="Every design choice came with a clear reason. That made it easy to get our business and security teams on the same page." who="Digital & IT lead, TAKRAF · Customer portal, 2026" />
+      <Quote size="l" quote="The design fits our brand perfectly, and it did from the very first version. It already feels like a TAKRAF product." who="Marketing, TAKRAF" />
+      <a href="/work/takraf/">Read the TAKRAF case</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .about-hero { display: grid; gap: 2.5rem; padding-block: clamp(3rem, 2rem + 4vw, 5rem) 3rem; }
+  .intro { display: grid; gap: 1.75rem; align-content: start; }
+  .copy { display: grid; gap: 1.25rem; max-width: 40rem; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .photo { border-radius: var(--radius-s); overflow: hidden; max-width: 26rem; }
+  @media (min-width: 1000px) { .about-hero { grid-template-columns: 1.5fr 1fr; } .photo { justify-self: end; } }
+  .group + .group { margin-top: 3.5rem; }
+  .group-name { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.5rem 1rem; padding-bottom: 1rem; }
+  .rows { border-top: 1px solid var(--border); }
+  .row { display: grid; gap: 0.75rem 2.5rem; padding-block: 2rem; border-bottom: 1px solid var(--border); }
+  .row-title { display: grid; gap: 0.375rem; align-content: start; }
+  .row-text { max-width: 42rem; color: var(--text-secondary); }
+  @media (min-width: 900px) { .row { grid-template-columns: 13rem 20rem 1fr; } .row.edu { grid-template-columns: 13rem 1fr; } }
+  .toolbox { display: grid; gap: 2rem; }
+  @media (min-width: 900px) { .toolbox { grid-template-columns: 1fr 1fr; } }
+  .toolbox h3 { margin-bottom: 1rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .chips li { border: 1px solid var(--border); border-radius: 999px; padding: 0.5rem 0.875rem; background: var(--bg-card); }
+  .langs-title { margin-top: 3rem; margin-bottom: 1rem; }
+  .langs { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1.5rem; margin: 0; }
+  .langs div { border-top: 1px solid var(--border); padding-top: 1rem; display: grid; gap: 0.25rem; }
+  .langs dd { margin: 0; }
+  .quotes { display: grid; gap: 2.5rem; margin-top: 1.75rem; }
+</style>

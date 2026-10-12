@@ -1,0 +1,39 @@
+---
+import { site } from '../data/site';
+interface Props { lead?: string }
+const { lead = 'Open to Senior Product Designer roles on complex B2B and B2C products, remote or in Warsaw.' } = Astro.props;
+---
+<footer class="footer">
+  <div class="container">
+    <div class="contact-block">
+      <div class="contact-text">
+        <h2 class="display-l">Let’s talk about your product.</h2>
+        <p class="body-l">{lead}</p>
+      </div>
+      <ul role="list" class="links">
+        <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+        <li><a href={site.linkedin}>{site.linkedinLabel}</a></li>
+        <li><a href={site.cv}>Download CV <span class="visually-hidden">(PDF)</span></a></li>
+      </ul>
+    </div>
+    <div class="legal label label-s">
+      <span>{site.name} · {site.role}</span>
+      <span>Designed and built by me · <a href={site.repo}>Source on GitHub</a> · © {new Date().getFullYear()}</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer { padding-top: var(--section-gap); padding-bottom: 2rem; }
+  .contact-block {
+    background: var(--text-primary); color: var(--text-inverse);
+    border-radius: var(--radius-m); padding: clamp(2rem, 1rem + 4vw, 4rem);
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 2rem;
+  }
+  .contact-text { display: grid; gap: 1rem; max-width: 44rem; }
+  .contact-text .body-l { color: #C9CBC4; }
+  .links { display: grid; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.875rem; }
+  .links a { color: var(--text-inverse); display: inline-block; padding-block: 0.25rem; }
+  .legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem 2rem; margin-top: 2rem; }
+  .legal a { color: inherit; }
+</style>

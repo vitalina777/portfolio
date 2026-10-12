@@ -1,0 +1,37 @@
+---
+import { site } from '../data/site';
+interface Props { current?: 'work' | 'about' }
+const { current } = Astro.props;
+---
+<header class="header">
+  <div class="container header-inner">
+    <a class="logo" href="/">{site.name}</a>
+    <nav aria-label="Main">
+      <ul role="list" class="nav">
+        <li><a href="/#work" aria-current={current === 'work' ? 'page' : undefined}>Work</a></li>
+        <li><a href="/about/" aria-current={current === 'about' ? 'page' : undefined}>About</a></li>
+        <li><a href={site.cv}>CV <span class="visually-hidden">(PDF)</span></a></li>
+        <li><a class="btn btn-primary contact" href={`mailto:${site.email}`}>Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header { border-bottom: 1px solid var(--border); }
+  .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 98px; }
+  .logo { font-weight: 600; font-size: 1.0625rem; letter-spacing: -0.01em; text-decoration: none; }
+  .nav { display: flex; align-items: center; gap: 1.75rem; }
+  .nav a:not(.btn) {
+    font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; display: inline-flex; align-items: center; min-height: 44px;
+  }
+  .nav a[aria-current='page'] { color: var(--accent); }
+  .nav a:not(.btn):hover { text-decoration: underline; }
+  .contact { min-height: 40px; padding: 0.5rem 1rem; font-family: var(--font-mono); font-size: 0.8125rem; letter-spacing: 0.06em; text-transform: uppercase; }
+  @media (max-width: 560px) {
+    .header-inner { min-height: 72px; }
+    .nav { gap: 1rem; }
+    .contact { display: none; }
+  }
+</style>
