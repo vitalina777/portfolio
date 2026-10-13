@@ -28,6 +28,9 @@ const ogImage = new URL(withBase('/og.png'), Astro.site);
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
     <ClientRouter />
+    {site.goatcounter && (
+      <script is:inline async data-goatcounter={`https://${site.goatcounter}.goatcounter.com/count`} data-goatcounter-settings='{"no_onload": true, "no_events": true}' src="https://gc.zgo.at/count.js"></script>
+    )}
     <script is:inline>
       document.documentElement.classList.add('js');
       document.addEventListener('astro:after-swap', () => document.documentElement.classList.add('js'));
@@ -61,6 +64,32 @@ const ogImage = new URL(withBase('/og.png'), Astro.site);
         els.forEach((e) => io.observe(e));
       }
       document.addEventListener('astro:page-load', initReveal);
+
+
+      // Privacy-friendly analytics (GoatCounter, no cookies).
+      // Counts every page view, including smooth client-side navigation,
+      // plus clicks on the CV, LinkedIn and email links.
+      type GC = { count: (o: Record<string, unknown>) => void };
+      const gc = () => (window as unknown as { goatcounter?: GC }).goatcounter;
+      function whenReady(fn: () => void, tries = 25) {
+        if (gc()?.count) fn();
+        else if (tries > 0) setTimeout(() => whenReady(fn, tries - 1), 200);
+      }
+      // First view keeps the real referrer (and ?ref=… tags); later views come from the previous page
+      let prevUrl = '';
+      document.addEventListener('astro:page-load', () => {
+        const opts: Record<string, unknown> = { path: location.pathname, title: document.title };
+        if (prevUrl) opts.referrer = prevUrl;
+        prevUrl = location.href;
+        whenReady(() => gc()!.count(opts));
+      });
+      document.addEventListener('click', (e) => {
+        const a = (e.target as Element | null)?.closest?.('a');
+        if (!a) return;
+        const href = a.getAttribute('href') || '';
+        const ev = href.endsWith('.pdf') ? ['cv-open', 'Open CV'] : href.includes('linkedin.com') ? ['linkedin-click', 'LinkedIn'] : href.startsWith('mailto:') ? ['email-click', 'Email'] : null;
+        if (ev) whenReady(() => gc()!.count({ path: ev[0], title: ev[1], event: true }));
+      });
     </script>
   </body>
 </html>

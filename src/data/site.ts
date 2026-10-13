@@ -7,6 +7,8 @@ export const site = {
   linkedin: 'https://www.linkedin.com/in/vitalina-plichko',
   linkedinLabel: 'linkedin.com/in/vitalina-plichko',
   cv: withBase('/Vitalina_Plichko_CV.pdf'),
+  // GoatCounter account: https://vplichko.goatcounter.com (set to '' to turn analytics off)
+  goatcounter: 'vplichko',
   description:
     'Senior Product Designer with 6+ years in B2B and B2C. I design products where many roles, rules and data meet.',
 };
