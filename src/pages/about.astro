@@ -40,7 +40,7 @@ const education = [
 ---
 <Base title="About" current="about" description="About Vitalina Plichko, Senior Product Designer: experience, mentoring, toolbox and education.">
   <section class="container about-hero">
-    <div class="intro">
+    <div class="intro-col intro">
       <p class="label">About · Warsaw · Open to remote</p>
       <h1 class="display-xl">Hi, I’m Vitalina.</h1>
       <div class="copy">
@@ -56,7 +56,7 @@ const education = [
     <div class="photo"><Img src="about/portrait.jpg" alt="Vitalina Plichko, portrait in a red top" ratio="3 / 4" eager /></div>
   </section>
 
-  <div class="container">
+  <div class="container" data-reveal>
     <Facts items={[
       { v: '6+', l: 'Years in product design' },
       { v: '4', l: 'Industries: insurance, industrial, energy, health' },
@@ -66,11 +66,11 @@ const education = [
   </div>
 
   <section class="container section" aria-labelledby="exp">
-    <div class="section-head"><SectionLabel n="01" text="Experience" /><h2 id="exp" class="h2">What I’ve worked on.</h2></div>
+    <div class="section-head" data-reveal><SectionLabel n="01" text="Experience" /><h2 id="exp" class="h2">What I’ve worked on.</h2></div>
     {groups.map((g) => (
       <div class="group">
-        <h3 class="h3 group-name">{g.name} <span class="label label-s">{g.meta}</span></h3>
-        <ul role="list" class="rows">
+        <h3 class="h3 group-name" data-reveal>{g.name} <span class="label label-s">{g.meta}</span></h3>
+        <ul role="list" class="rows" data-reveal-group>
           {g.rows.map((r) => (
             <li class="row">
               <p class="label label-s">{r.years}</p>
@@ -88,8 +88,8 @@ const education = [
   </section>
 
   <section class="container section" aria-labelledby="mentor">
-    <div class="section-head"><SectionLabel n="02" text="Mentoring" /><h2 id="mentor" class="h2">Helping designers grow.</h2></div>
-    <ul role="list" class="rows">
+    <div class="section-head" data-reveal><SectionLabel n="02" text="Mentoring" /><h2 id="mentor" class="h2">Helping designers grow.</h2></div>
+    <ul role="list" class="rows" data-reveal-group>
       {mentoring.map((r) => (
         <li class="row">
           <p class="label label-s">{r.years}</p>
@@ -101,22 +101,22 @@ const education = [
   </section>
 
   <section class="container section" aria-labelledby="tools">
-    <div class="section-head"><SectionLabel n="03" text="Toolbox" /><h2 id="tools" class="h2">Methods and tools I use every day.</h2></div>
-    <div class="toolbox">
+    <div class="section-head" data-reveal><SectionLabel n="03" text="Toolbox" /><h2 id="tools" class="h2">Methods and tools I use every day.</h2></div>
+    <div class="toolbox" data-reveal>
       <div><h3 class="label">Methods</h3><ul role="list" class="chips">{methods.map((m) => <li>{m}</li>)}</ul></div>
       <div><h3 class="label">Tools</h3><ul role="list" class="chips">{tools.map((m) => <li>{m}</li>)}</ul></div>
     </div>
   </section>
 
   <section class="container section" aria-labelledby="edu">
-    <div class="section-head"><SectionLabel n="04" text="Education" /><h2 id="edu" class="visually-hidden">Education and languages</h2></div>
-    <ul role="list" class="rows">
+    <div class="section-head" data-reveal><SectionLabel n="04" text="Education" /><h2 id="edu" class="visually-hidden">Education and languages</h2></div>
+    <ul role="list" class="rows" data-reveal-group>
       {education.map((e) => (
         <li class="row edu"><p class="label label-s">{e.years}</p><div class="row-title"><h3 class="h4">{e.title}</h3><p class="muted">{e.meta}</p></div></li>
       ))}
     </ul>
     <h3 class="label langs-title">Languages</h3>
-    <dl class="langs">
+    <dl class="langs" data-reveal-group>
       <div><dt class="h4">Ukrainian</dt><dd class="muted">Native</dd></div>
       <div><dt class="h4">English</dt><dd class="muted">Upper-intermediate · B2</dd></div>
       <div><dt class="h4">Polish</dt><dd class="muted">Intermediate · B1</dd></div>
@@ -125,7 +125,7 @@ const education = [
 
   <section class="container section" aria-label="What clients say">
     <p class="label">What clients say</p>
-    <div class="quotes">
+    <div class="quotes" data-reveal-group>
       <Quote size="l" quote="Every design choice came with a clear reason. That made it easy to get our business and security teams on the same page." who="Digital & IT lead, TAKRAF · Customer portal, 2026" />
       <Quote size="l" quote="The design fits our brand perfectly, and it did from the very first version. It already feels like a TAKRAF product." who="Marketing, TAKRAF" />
       <a href={withBase('/work/takraf/')}>Read the TAKRAF case</a>
@@ -135,7 +135,7 @@ const education = [
 
 <style>
   .about-hero { display: grid; gap: 2.5rem; padding-block: clamp(3rem, 2rem + 4vw, 5rem) 3rem; }
-  .intro { display: grid; gap: 1.75rem; align-content: start; }
+  .intro-col { display: grid; gap: 1.75rem; align-content: start; }
   .copy { display: grid; gap: 1.25rem; max-width: 40rem; }
   .ctas { display: flex; flex-wrap: wrap; gap: 0.75rem; }
   .photo { border-radius: var(--radius-s); overflow: hidden; max-width: 26rem; }

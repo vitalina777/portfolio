@@ -6,7 +6,7 @@ interface Props { c: Case; wide?: boolean }
 const { c, wide = false } = Astro.props;
 ---
 <article class:list={['card', { wide }]}>
-  <div class="cover" style={c.coverBg ? `background:${c.coverBg}` : undefined}>
+  <div class="cover" transition:name={`cover-${c.slug}`} style={c.coverBg ? `background:${c.coverBg}` : undefined}>
     <slot name="cover"><Img src={c.cover.src} alt={c.cover.alt} ratio="4 / 3" /></slot>
   </div>
   <div class="body">
@@ -22,7 +22,11 @@ const { c, wide = false } = Astro.props;
 <style>
   .card { position: relative; display: grid; gap: 1.25rem; align-content: start; }
   .cover { border-radius: var(--radius-m); overflow: hidden; background: linear-gradient(160deg, #E8ECF2, #DCE5EE); }
-  .cover :global(img) { width: 100%; height: auto; }
+  .cover { transition: box-shadow 0.45s var(--ease-out), transform 0.45s var(--ease-out); }
+  .cover :global(img) { width: 100%; height: auto; transition: transform 0.6s var(--ease-out); }
+  .card:hover .cover, .card:focus-within .cover { box-shadow: 0 22px 44px -24px rgba(16, 18, 21, 0.35); transform: translateY(-3px); }
+  .card:hover .cover :global(img), .card:focus-within .cover :global(img) { transform: scale(1.02); }
+  @media (prefers-reduced-motion: reduce) { .card:hover .cover, .card:focus-within .cover, .card:hover .cover :global(img) { transform: none; } }
   .body { display: grid; gap: 0.75rem; }
   .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem; }
   .tag { border: 1px solid var(--text-primary); color: var(--text-primary); padding: 0.125rem 0.375rem; }

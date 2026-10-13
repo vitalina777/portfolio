@@ -16,20 +16,20 @@ const next = getCase(c.next)!;
 ---
 <Base title={c.title} description={c.tldr.outcome} current="work">
   <article>
-    <header class="container case-hero">
+    <header class="container case-hero intro">
       <a class="label back" href={withBase('/#work')}>All work</a>
       <p class="label eyebrow"><span class="accent">{c.number}</span>{c.eyebrow.map((e) => <span>{e}</span>)}</p>
       <h1 class="display-xl">{c.title}</h1>
       <p class="body-l measure">{c.subtitle}</p>
-      <div class="hero-img"><Img src={c.hero.src} alt={c.hero.alt} ratio={c.hero.ratio} eager /></div>
+      <div class="hero-img" transition:name={`cover-${c.slug}`}><Img src={c.hero.src} alt={c.hero.alt} ratio={c.hero.ratio} eager /></div>
     </header>
 
     <div class="container">
-      <dl class="snapshot">
+      <dl class="snapshot" data-reveal-group>
         {c.snapshot.map((s) => <div><dt class="label label-s">{s.k}</dt><dd>{s.v}</dd></div>)}
       </dl>
 
-      <section class="tldr" aria-labelledby="tldr">
+      <section class="tldr" aria-labelledby="tldr" data-reveal>
         <h2 id="tldr" class="label accent">TL;DR</h2>
         <div class="tldr-grid">
           <div><h3 class="h4">Challenge</h3><p>{c.tldr.challenge}</p></div>
@@ -38,17 +38,17 @@ const next = getCase(c.next)!;
         </div>
       </section>
 
-      <Facts items={c.numbers} />
+      <div data-reveal><Facts items={c.numbers} /></div>
     </div>
 
     {c.sections.map((s, i) => (
       <section class="container section" aria-labelledby={`s${i}`}>
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <SectionLabel n={String(i + 1).padStart(2, '0')} text={s.label} />
           <h2 id={`s${i}`} class="h2 heading">{s.heading}</h2>
           {s.lead && <p class="body-l measure">{s.lead}</p>}
         </div>
-        <div class="blocks">{s.blocks?.map((b) => <Block b={b} />)}</div>
+        <div class="blocks" data-reveal-group>{s.blocks?.map((b) => <Block b={b} />)}</div>
       </section>
     ))}
 
@@ -59,7 +59,7 @@ const next = getCase(c.next)!;
     )}
 
     <nav class="container section" aria-label="Next case">
-      <a class="next" href={withBase(`/work/${next.slug}/`)}>
+      <a class="next" data-reveal href={withBase(`/work/${next.slug}/`)}>
         <span class="label">Next case</span>
         <span class="h2">{next.cardTitle}</span>
       </a>

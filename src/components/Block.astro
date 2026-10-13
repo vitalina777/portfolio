@@ -80,8 +80,8 @@ const { b } = Astro.props;
 
 {b.type === 'decision' && (
   <div class:list={['panel decision', { flip: b.flip }]}>
-    {b.image && <div class="decision-img"><Img src={b.image.src} alt={b.image.alt} ratio={b.image.ratio ?? '661 / 462'} /></div>}
-    <div class="decision-cards">
+    {b.image && <div class="decision-img" data-reveal><Img src={b.image.src} alt={b.image.alt} ratio={b.image.ratio ?? '661 / 462'} /></div>}
+    <div class="decision-cards" data-reveal-group>
       <div class="card">
         <p class="badge problem">{b.problemTag}</p>
         <p class="h4">{b.problem}</p>

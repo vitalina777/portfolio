@@ -14,7 +14,7 @@ const strengths = [
 ];
 ---
 <Base current="work">
-  <section class="container hero" aria-labelledby="hero-title">
+  <section class="container hero intro" aria-labelledby="hero-title">
     <p class="label eyebrow"><span class="dot" aria-hidden="true"></span>Senior Product Designer · B2B &amp; B2C · Warsaw · Open to remote</p>
     <h1 id="hero-title" class="display-xl">I design products where many roles, rules and data meet.</h1>
     <p class="body-l measure">{site.role} with 6+ years in B2B and B2C. My latest portal is live with 3 customers across dozens of mine sites, and my accessibility work took allyz from 65% to 93% WCAG AA.</p>
@@ -24,7 +24,7 @@ const strengths = [
     </div>
   </section>
 
-  <div class="container">
+  <div class="container" data-reveal>
     <Facts items={[
       { v: '6+', l: 'Years' },
       { v: 'Won', l: 'Against dozens of vendors' },
@@ -35,11 +35,11 @@ const strengths = [
   </div>
 
   <section id="work" class="container section" aria-labelledby="work-title">
-    <div class="work-head">
+    <div class="work-head" data-reveal>
       <h2 id="work-title" class="h2">Selected work</h2>
       <p class="label">{String(cases.length).padStart(2, '0')} cases</p>
     </div>
-    <div class="grid">
+    <div class="grid" data-reveal-group>
       <CaseCard c={others[0]} />
       <CaseCard c={allyz}>
         <div slot="cover" class="allyz-cover">
@@ -68,18 +68,18 @@ const strengths = [
 
   <section class="container section" aria-label="What clients say">
     <p class="label eyebrow"><span class="dot" aria-hidden="true"></span>What clients say</p>
-    <div class="testimonial">
+    <div class="testimonial" data-reveal>
       <Quote size="l" quote="Every design choice came with a clear reason. That made it easy to get our business and security teams on the same page." who="Digital & IT lead, TAKRAF · Customer portal, 2026" />
       <a href={withBase('/work/takraf/')}>Read the TAKRAF case</a>
     </div>
   </section>
 
   <section class="container section" aria-labelledby="strengths-title">
-    <div class="section-head">
+    <div class="section-head" data-reveal>
       <p class="label">What I bring</p>
       <h2 id="strengths-title" class="h2">Three things teams usually hire me for.</h2>
     </div>
-    <ul role="list" class="strengths">
+    <ul role="list" class="strengths" data-reveal-group>
       {strengths.map((s) => (
         <li>
           <h3 class="h4">{s.title}</h3>
