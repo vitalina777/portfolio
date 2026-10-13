@@ -12,7 +12,10 @@ const [owner, repo] = (process.env.GITHUB_REPOSITORY || '').split('/');
 // Only a repo named exactly "<login>.github.io" is served from the root.
 const isUserSite = !repo || repo.toLowerCase() === `${(owner || '').toLowerCase()}.github.io`;
 
+const REPO_URL = owner && repo ? `https://github.com/${owner}/${repo}` : '';
+
 export default defineConfig({
+  vite: { define: { __REPO_URL__: JSON.stringify(REPO_URL) } },
   site: CUSTOM_DOMAIN ? `https://${CUSTOM_DOMAIN}` : owner ? `https://${owner.toLowerCase()}.github.io` : 'http://localhost:4321',
   base: CUSTOM_DOMAIN || isUserSite ? '/' : `/${repo}`,
   trailingSlash: 'ignore',

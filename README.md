@@ -22,6 +22,10 @@ npm run build      # production build in dist/
 5. Update `repo` in `src/data/site.ts` with your repository link.
 6. Custom domain later: set `CUSTOM_DOMAIN` in `astro.config.mjs`.
 
+### Uploading through the GitHub website
+
+The `.github` folder (with the deploy workflow) is hidden on Mac and Windows. If you drag and drop files in the browser, make it visible first (Mac Finder: Cmd + Shift + .) and upload it too, or GitHub will not build the site.
+
 ## Where things live
 
 | What | File |
@@ -38,11 +42,13 @@ To edit text, change `src/data/cases.ts` or the page files. Cases marked `draft:
 ## Images
 
 Images are not in the repo yet. Until a file exists, the site shows a striped placeholder with the expected path.
-Export each frame from Figma at **2×** (PNG or WebP) and save it under the path below. Astro resizes and converts images automatically.
+In the Figma file, open the page **🌐 Site export**. Every image is already a frame named with its path (e.g. `takraf/hero`) and set to export at 2×.
+Select all frames (Cmd/Ctrl + A) → **Export** in the right panel → you get folders `takraf/`, `allyz/`, `cleanconnect/`, `liki24/`, `vchasno/`, `about/`. Copy them into `src/assets/`.
+Astro resizes and converts images to WebP automatically. The allyz card on the home page is built in HTML, so it needs no image.
 
-Also add:
-- `public/Vitalina_Plichko_CV.pdf` — the CV exported from Figma
-- `public/og.png` — 1200×630 preview image for LinkedIn and messengers (e.g. the TAKRAF cover)
+Already included:
+- `public/Vitalina_Plichko_CV.pdf` — the ATS-friendly CV. To use the designed Figma version instead, export it as PDF and replace the file, keeping the same name.
+- `public/og.png` — 1200×630 preview image for LinkedIn and messengers.
 
 | File | Alt text (already in the code) |
 |---|---|
@@ -58,7 +64,6 @@ Also add:
 | `src/assets/takraf/state-success.png` | Administration list with a success toast after approving a user |
 | `src/assets/takraf/service-requests.png` | Service requests: a request list, a request detail with status and history from the CRM |
 | `src/assets/takraf/en-es.png` | The same fleet screen in English and Spanish side by side |
-| `src/assets/allyz/card.png` | (decorative) |
 | `src/assets/allyz/hero.png` | allyz accessibility overview: WCAG 2.2 AA checklist for web and app |
 | `src/assets/cleanconnect/card.png` | CleanConnect carbon accounting dashboard with daily CO₂ totals and a bar chart |
 | `src/assets/cleanconnect/hero.png` | CleanConnect dashboards for emissions monitoring |
