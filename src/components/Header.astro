@@ -10,8 +10,8 @@ const { current } = Astro.props;
       <ul role="list" class="nav">
         <li><a href={withBase('/#work')} aria-current={current === 'work' ? 'page' : undefined}>Work</a></li>
         <li><a href={withBase('/about/')} aria-current={current === 'about' ? 'page' : undefined}>About</a></li>
-        <li><a href={site.cv}>CV <span class="visually-hidden">(PDF)</span></a></li>
-        <li><a class="btn btn-primary contact" href={`mailto:${site.email}`}>Contact</a></li>
+        <li><a href={site.cv} target="_blank" rel="noopener noreferrer">CV <span class="visually-hidden">(PDF, opens in a new tab)</span></a></li>
+        <li><a class="btn btn-primary contact" href={`mailto:${site.email}`}>Contact by mail</a></li>
       </ul>
     </nav>
   </div>
