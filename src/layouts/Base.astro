@@ -83,6 +83,41 @@ const ogImage = new URL(withBase('/og.png'), Astro.site);
         prevUrl = location.href;
         whenReady(() => gc()!.count(opts));
       });
+      // Reading depth (every 10%) and sections reached, per page
+      const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+      const pageName = () => {
+        const p = location.pathname.slice(base.length).replace(/^\/|\/$/g, '');
+        return p === '' ? 'home' : p.replace(/^work\//, '');
+      };
+      const sendEvent = (path: string) => whenReady(() => gc()!.count({ path, title: path, event: true }));
+      let sentDepth = new Set<number>();
+      let sectionObserver: IntersectionObserver | null = null;
+      let ticking = false;
+      const checkDepth = () => {
+        ticking = false;
+        const doc = document.documentElement;
+        const pct = Math.min(100, ((window.scrollY + window.innerHeight) / doc.scrollHeight) * 100);
+        for (let t = 10; t <= 100; t += 10) {
+          if (pct >= t - 0.5 && !sentDepth.has(t)) { sentDepth.add(t); sendEvent(`${pageName()} · read ${t}%`); }
+        }
+      };
+      window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(checkDepth); } }, { passive: true });
+      document.addEventListener('astro:page-load', () => {
+        sentDepth = new Set();
+        setTimeout(checkDepth, 800);
+        sectionObserver?.disconnect();
+        const seen = new Set<string>();
+        sectionObserver = new IntersectionObserver((entries) => {
+          entries.forEach((en) => {
+            const name = (en.target as HTMLElement).dataset.trackSection || '';
+            if (en.isIntersecting && name && !seen.has(name)) {
+              seen.add(name); sendEvent(`${pageName()} · section: ${name}`); sectionObserver?.unobserve(en.target);
+            }
+          });
+        }, { threshold: 0, rootMargin: '0px 0px -35% 0px' });
+        document.querySelectorAll('[data-track-section]').forEach((el) => sectionObserver!.observe(el));
+      });
+
       document.addEventListener('click', (e) => {
         const a = (e.target as Element | null)?.closest?.('a');
         if (!a) return;

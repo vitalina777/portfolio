@@ -29,7 +29,7 @@ const next = getCase(c.next)!;
         {c.snapshot.map((s) => <div><dt class="label label-s">{s.k}</dt><dd>{s.v}</dd></div>)}
       </dl>
 
-      <section class="tldr" aria-labelledby="tldr" data-reveal>
+      <section class="tldr" aria-labelledby="tldr" data-reveal data-track-section="TL;DR">
         <h2 id="tldr" class="label accent">TL;DR</h2>
         <div class="tldr-grid">
           <div><h3 class="h4">Challenge</h3><p>{c.tldr.challenge}</p></div>
@@ -42,7 +42,7 @@ const next = getCase(c.next)!;
     </div>
 
     {c.sections.map((s, i) => (
-      <section class="container section" aria-labelledby={`s${i}`}>
+      <section class="container section" aria-labelledby={`s${i}`} data-track-section={s.label}>
         <div class="section-head" data-reveal>
           <SectionLabel n={String(i + 1).padStart(2, '0')} text={s.label} />
           <h2 id={`s${i}`} class="h2 heading">{s.heading}</h2>
@@ -58,7 +58,7 @@ const next = getCase(c.next)!;
       </div>
     )}
 
-    <nav class="container section" aria-label="Next case">
+    <nav class="container section" aria-label="Next case" data-track-section="Next case">
       <a class="next" data-reveal href={withBase(`/work/${next.slug}/`)}>
         <span class="label">Next case</span>
         <span class="h2">{next.cardTitle}</span>

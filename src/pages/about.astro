@@ -65,7 +65,7 @@ const education = [
     ]} />
   </div>
 
-  <section class="container section" aria-labelledby="exp">
+  <section class="container section" aria-labelledby="exp" data-track-section="Experience">
     <div class="section-head" data-reveal><SectionLabel n="01" text="Experience" /><h2 id="exp" class="h2">What I’ve worked on.</h2></div>
     {groups.map((g) => (
       <div class="group">
@@ -87,7 +87,7 @@ const education = [
     ))}
   </section>
 
-  <section class="container section" aria-labelledby="mentor">
+  <section class="container section" aria-labelledby="mentor" data-track-section="Mentoring">
     <div class="section-head" data-reveal><SectionLabel n="02" text="Mentoring" /><h2 id="mentor" class="h2">Helping designers grow.</h2></div>
     <ul role="list" class="rows" data-reveal-group>
       {mentoring.map((r) => (
@@ -100,7 +100,7 @@ const education = [
     </ul>
   </section>
 
-  <section class="container section" aria-labelledby="tools">
+  <section class="container section" aria-labelledby="tools" data-track-section="Toolbox">
     <div class="section-head" data-reveal><SectionLabel n="03" text="Toolbox" /><h2 id="tools" class="h2">Methods and tools I use every day.</h2></div>
     <div class="toolbox" data-reveal>
       <div><h3 class="label">Methods</h3><ul role="list" class="chips">{methods.map((m) => <li>{m}</li>)}</ul></div>
@@ -108,7 +108,7 @@ const education = [
     </div>
   </section>
 
-  <section class="container section" aria-labelledby="edu">
+  <section class="container section" aria-labelledby="edu" data-track-section="Education">
     <div class="section-head" data-reveal><SectionLabel n="04" text="Education" /><h2 id="edu" class="visually-hidden">Education and languages</h2></div>
     <ul role="list" class="rows" data-reveal-group>
       {education.map((e) => (
@@ -123,7 +123,7 @@ const education = [
     </dl>
   </section>
 
-  <section class="container section" aria-label="What clients say">
+  <section class="container section" aria-label="What clients say" data-track-section="Client quotes">
     <p class="label">What clients say</p>
     <div class="quotes" data-reveal-group>
       <Quote size="l" quote="Every design choice came with a clear reason. That made it easy to get our business and security teams on the same page." who="Digital & IT lead, TAKRAF · Customer portal, 2026" />
