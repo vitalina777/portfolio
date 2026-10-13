@@ -7,7 +7,6 @@ const takraf: Case = {
   subtitle: 'From RFP to a live portal: one secure place for machines that run for decades.',
   eyebrow: ['Industrial B2B', 'Customer portal', '2026'],
   category: 'Industrial B2B · 2026',
-  tag: 'Live product',
   cardTitle: 'TAKRAF: one secure portal for machines that run for decades',
   cardMeta: 'Won against dozens of vendors · Live with 3 customers',
   cover: { src: 'takraf/card.png', alt: 'TAKRAF portal: fleet list of mining machines with status counts, and a machine profile on a phone' },
