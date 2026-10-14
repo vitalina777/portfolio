@@ -118,6 +118,31 @@ const ogImage = new URL(withBase('/og.png'), Astro.site);
         document.querySelectorAll('[data-track-section]').forEach((el) => sectionObserver!.observe(el));
       });
 
+      // Time on page: only while the tab is visible, sent once when the visitor leaves
+      const bucket = (sec: number) =>
+        sec < 10 ? 'under 10s' : sec < 30 ? '10–30s' : sec < 60 ? '30s–1 min' : sec < 120 ? '1–2 min' : sec < 300 ? '2–5 min' : '5+ min';
+      let visibleMs = 0, visibleSince = 0, timeSent = true, timePage = '';
+      const startTimer = () => { timePage = pageName(); visibleMs = 0; visibleSince = document.visibilityState === 'visible' ? performance.now() : 0; timeSent = false; };
+      const sendTime = () => {
+        if (timeSent) return;
+        timeSent = true;
+        if (visibleSince) { visibleMs += performance.now() - visibleSince; visibleSince = 0; }
+        const name = `${timePage} · time ${bucket(visibleMs / 1000)}`;
+        const g = gc(); if (g) g.count({ path: name, title: name, event: true });
+      };
+      document.addEventListener('astro:page-load', startTimer);
+      document.addEventListener('astro:before-preparation', sendTime);
+      window.addEventListener('pagehide', sendTime);
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          if (visibleSince) { visibleMs += performance.now() - visibleSince; visibleSince = 0; }
+          // On phones switching apps often never fires pagehide, so send after a short time in the background
+          setTimeout(() => { if (document.visibilityState === 'hidden') sendTime(); }, 3000);
+        } else if (!timeSent) {
+          visibleSince = performance.now();
+        }
+      });
+
       document.addEventListener('click', (e) => {
         const a = (e.target as Element | null)?.closest?.('a');
         if (!a) return;
