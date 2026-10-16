@@ -14,7 +14,11 @@ export type Block =
   | { type: 'stats'; items: { v: string; l: string }[] }
   | { type: 'outcomes'; items: Item[] }
   | { type: 'quotes'; label?: string; items: { quote: string; who: string }[] }
-  | { type: 'list'; label?: string; items: Item[] };
+  | { type: 'list'; label?: string; items: Item[] }
+  | { type: 'steps'; items: Item[]; note?: string }
+  | { type: 'palette'; label?: string; colors: string[] }
+  | { type: 'media'; eyebrow?: string; title: string; text?: string; rows?: { k: string; v: string }[]; image?: Img; textFirst?: boolean; framed?: boolean }
+  | { type: 'tokens'; items: { from: string; to: string; text: string; swatches: { name: string; hex: string; bg?: string; ratio: string; pass: boolean }[] }[] };
 
 export type Section = { label: string; heading: string; lead?: string; blocks?: Block[] };
 
